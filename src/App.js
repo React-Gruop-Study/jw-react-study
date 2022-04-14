@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './routes/Home';
+import About from './routes/About';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-          
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Navigation/>
+
+    {/* 인라인으로 component를 쓰게 되면 의도히지 않는 마운트/언마운트 유발하기 때문에
+    컴포넌트에 지역 변수를 넘겨주고자 할 때 render를 사용하거나 children prop를 사용하는 것 권장함 */}
+    <Route path="/" exact = {true} component={Home}/> 
+    <Route path="/about" component={About}/>
+    <Redirect path="*" to="/"/>
+    </BrowserRouter>
   );
 }
 
